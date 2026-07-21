@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Prépa Étoile">
+  <!--
+    Favicon : l'étoile du logo, redessinée pour les petites tailles.
+    Trois écarts assumés par rapport à components/brand/Star.tsx :
+      - les 8 aigrettes fines sont supprimées (à 16 px, une bouillie grise) ;
+      - les rayons sont épaissis et moins effilés, sinon les pointes se
+        volatilisent au rendu ;
+      - le dégradé reste clair jusqu'aux pointes : sur fond bleu nuit, l'or
+        sombre de l'original n'aurait aucun contraste.
+    Conservés : le cœur clair du logo, les diagonales à 86.5 % des cardinaux.
+  -->
+  <defs>
+    <radialGradient id="or" cx="50%" cy="50%" r="50%">
+      <stop offset="8%" stop-color="#F4E4C8"/>
+      <stop offset="55%" stop-color="#DFC08A"/>
+      <stop offset="100%" stop-color="#CBA470"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="2" fill="#071F3D"/>
+
+  <g fill="url(#or)">
+    <path d="M32 10.4 Q33.2 21.5 33.9 27 L32 32 L30.1 27 Q30.8 21.5 32 10.4 Z" transform="rotate(45 32 32)"/>
+    <path d="M32 10.4 Q33.2 21.5 33.9 27 L32 32 L30.1 27 Q30.8 21.5 32 10.4 Z" transform="rotate(135 32 32)"/>
+    <path d="M32 10.4 Q33.2 21.5 33.9 27 L32 32 L30.1 27 Q30.8 21.5 32 10.4 Z" transform="rotate(225 32 32)"/>
+    <path d="M32 10.4 Q33.2 21.5 33.9 27 L32 32 L30.1 27 Q30.8 21.5 32 10.4 Z" transform="rotate(315 32 32)"/>
+
+    <path d="M32 5 Q33.4 20 34.3 26 L32 32 L29.7 26 Q30.6 20 32 5 Z"/>
+    <path d="M32 5 Q33.4 20 34.3 26 L32 32 L29.7 26 Q30.6 20 32 5 Z" transform="rotate(90 32 32)"/>
+    <path d="M32 5 Q33.4 20 34.3 26 L32 32 L29.7 26 Q30.6 20 32 5 Z" transform="rotate(180 32 32)"/>
+    <path d="M32 5 Q33.4 20 34.3 26 L32 32 L29.7 26 Q30.6 20 32 5 Z" transform="rotate(270 32 32)"/>
+  </g>
+
+  <circle cx="32" cy="32" r="2.4" fill="#FDFAF4"/>
+</svg>

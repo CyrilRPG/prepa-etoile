@@ -92,6 +92,27 @@ volontairement : deux gouttières coexistent (84 px pour le texte et les boutons
 56 px pour la rangée d'icônes et les étoiles), et le titre n'a pas un corps
 unique (les deux lignes or sont à 85 % des deux lignes navy).
 
+## Favicon
+
+`app/icon.svg` fait foi : c'est l'étoile du logo, redessinée pour les petites
+tailles. Trois écarts assumés par rapport à `components/brand/Star.tsx` :
+
+- les 8 aigrettes fines sont supprimées (à 16 px, une bouillie grise) ;
+- les rayons sont épaissis et moins effilés, sinon les pointes se volatilisent ;
+- le dégradé reste clair jusqu'aux pointes, l'or sombre de l'original n'ayant
+  aucun contraste sur le fond bleu nuit.
+
+Après toute modification du SVG, régénérer les déclinaisons bitmap :
+
+```bash
+npm run favicon
+```
+
+Cela réécrit `app/favicon.ico` (16 + 32 + 48 px, pour les navigateurs anciens
+et la barre de favoris) et `app/apple-icon.png` (180 px, écran d'accueil iOS).
+Next.js pose seul les trois balises `<link>` ; les navigateurs modernes
+retiennent le SVG, vectoriel donc net à toute taille.
+
 ## Déploiement
 
 Le dépôt est sur [github.com/CyrilRPG/prepa-etoile](https://github.com/CyrilRPG/prepa-etoile).
