@@ -92,6 +92,27 @@ volontairement : deux gouttières coexistent (84 px pour le texte et les boutons
 56 px pour la rangée d'icônes et les étoiles), et le titre n'a pas un corps
 unique (les deux lignes or sont à 85 % des deux lignes navy).
 
+## Déploiement
+
+Le dépôt est sur [github.com/CyrilRPG/prepa-etoile](https://github.com/CyrilRPG/prepa-etoile).
+Vercel se branche dessus et redéploie à chaque `git push` sur `main`.
+
+Le site est un export statique (`output: "export"` dans `next.config.ts`) :
+Vercel le détecte seul, aucun réglage de build à saisir à l'import.
+
+### Domaine
+
+`site.url` (dans `lib/data/site.ts`) alimente le sitemap, les URL canoniques et
+OpenGraph. Il se résout dans cet ordre :
+
+1. `NEXT_PUBLIC_SITE_URL` si la variable existe ;
+2. l'URL de production Vercel, sinon ;
+3. `https://www.prepa-etoile.fr` en local.
+
+Une fois le vrai domaine branché, définir `NEXT_PUBLIC_SITE_URL` dans
+*Vercel > Settings > Environment Variables* et redéployer, pour que le sitemap
+annonce le domaine définitif plutôt que l'adresse `.vercel.app`.
+
 ### Revérifier après une modification
 
 ```bash
