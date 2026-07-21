@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Les couleurs et les métriques viennent du décodage pixel de
+   public/images/hero-final-prepa-etoile.png. Voir reference/DESIGN.md.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #fdfaf4;
+  --color-cream-shade: #f5f1e8;
+  --color-navy: #071f3d;
+  --color-navy-soft: #12345c;
+  --color-gold: #b8894c;
+  --color-gold-light: #c9a16e;
+  --color-ink: #0b0b0c;
+  --color-ink-muted: #6a6c6e;
+  --color-ink-soft: #9a9a9c;
+  --color-hairline: #e8e4da;
+  --color-hairline-dark: #1d3959;
+
+  --font-serif: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 2px;
+
+  /* Rythme vertical des sections */
+  --spacing-section: clamp(4.5rem, 7vw, 7.5rem);
+  --spacing-gutter: clamp(1.5rem, 5.18vw, 5.25rem);
+
+  /* Le hero est calé sur la maquette 1622px de large : 84/1622 = 5.18vw. */
+  --container-content: 75rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    color: var(--color-navy);
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-gold) 28%, transparent);
+    color: var(--color-navy);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+  }
+
+  /* Le chevron natif des <details> est remplacé par un trait dessiné. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary {
+    list-style: none;
+  }
+}
+
+@utility gutter {
+  padding-inline: var(--spacing-gutter);
+}
+
+/* ---------------------------------------------------------------------------
+   Échelle pixel du header et du hero.
+
+   La maquette de référence (hero-final-prepa-etoile.png) fait 1622 px de large.
+   Toutes les cotes du header et du hero sont écrites `calc(N * var(--u))` où N
+   est la valeur relevée sur la maquette, en pixels. `--u` est l'unité de la
+   maquette : elle vaut exactement 1px quand le conteneur fait 1622 px, si bien
+   que le rendu se superpose alors au pixel près à l'image de référence.
+
+   `--u` est une LONGUEUR, pas un facteur : `100cqw / 1622` divise une longueur
+   par un nombre, ce qui est valide, alors qu'un ratio demanderait de diviser
+   une longueur par une longueur (calc Level 4, mal supporté).
+
+   `cqw` plutôt que `vw` : la largeur du conteneur exclut la barre de défilement,
+   là où 100vw l'inclut, ce qui décalerait tout de ~15 px.
+
+   Bornes. En bas 0.78px : le layout large démarre au point de rupture `xl`
+   (1280 px de fenêtre, soit ~1265 px de conteneur une fois la barre de
+   défilement retirée), et 1622 × 0.78 = 1265. La borne ne mord donc jamais
+   au-dessus de xl, et en dessous c'est le layout compact qui prend la main.
+   En haut 1.12px, pour que la typographie ne s'emballe pas sur très grand
+   écran : au-delà, c'est le panneau photo qui absorbe la largeur restante.
+--------------------------------------------------------------------------- */
+@utility pixel-scale {
+  container-type: inline-size;
+  --u: clamp(0.78px, 100cqw / 1622, 1.12px);
+}
